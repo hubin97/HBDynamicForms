@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="75" id="KGk-i7-Jjw" customClass="HBDFExcessRemarkCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="74.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wxd-qm-K01">
+                        <rect key="frame" x="15" y="28.5" width="35" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mTX-wC-UCm" customClass="GCPlaceholderTextView">
+                        <rect key="frame" x="55" y="5" width="255" height="64.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <connections>
+                            <outlet property="delegate" destination="-1" id="MtB-hC-0Fj"/>
+                        </connections>
+                    </textView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mt_nopworkorder_ic_required.png" translatesAutoresizingMaskIntoConstraints="NO" id="eXd-ai-STa">
+                        <rect key="frame" x="5" y="32" width="10" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="5I3-Is-gHo"/>
+                            <constraint firstAttribute="width" secondItem="eXd-ai-STa" secondAttribute="height" id="dx5-JX-TyT"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Wxd-qm-K01" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9wN-9c-Dbx"/>
+                    <constraint firstItem="Wxd-qm-K01" firstAttribute="leading" secondItem="eXd-ai-STa" secondAttribute="trailing" id="I0F-Q1-c3O"/>
+                    <constraint firstItem="eXd-ai-STa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="Pvh-oi-0a4"/>
+                    <constraint firstItem="eXd-ai-STa" firstAttribute="width" secondItem="eXd-ai-STa" secondAttribute="height" id="bwM-X8-hog"/>
+                    <constraint firstAttribute="trailing" secondItem="mTX-wC-UCm" secondAttribute="trailing" constant="10" id="c5d-h0-Te5"/>
+                    <constraint firstItem="eXd-ai-STa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="llK-hg-3BN"/>
+                    <constraint firstItem="mTX-wC-UCm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="nbe-WY-5Qm"/>
+                    <constraint firstAttribute="bottom" secondItem="mTX-wC-UCm" secondAttribute="bottom" constant="5" id="ntR-uV-N8t"/>
+                    <constraint firstItem="Wxd-qm-K01" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="y28-ha-728"/>
+                    <constraint firstItem="mTX-wC-UCm" firstAttribute="leading" secondItem="Wxd-qm-K01" secondAttribute="trailing" constant="5" id="zXx-Oq-ibM"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="flagImageVIew" destination="eXd-ai-STa" id="t2O-qE-H2I"/>
+                <outlet property="flagWidth" destination="5I3-Is-gHo" id="C6f-Zr-Rd6"/>
+                <outlet property="titleNameLabel" destination="Wxd-qm-K01" id="Wzj-mh-EVQ"/>
+                <outlet property="valueTextView" destination="mTX-wC-UCm" id="6pA-Sh-20V"/>
+            </connections>
+            <point key="canvasLocation" x="87" y="151.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="mt_nopworkorder_ic_required.png" width="26" height="32"/>
+    </resources>
+</document>
