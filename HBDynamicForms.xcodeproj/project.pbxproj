@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1FE67E60212C659200223672 /* samplecode目录分析.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FE67E5F212C659200223672 /* samplecode目录分析.png */; };
+		1FE67E62212C65B400223672 /* cell自定义样式.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FE67E61212C65B400223672 /* cell自定义样式.png */; };
 		53635347206D0C1A00220FA8 /* MTDateAndTimePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53635344206D0C1900220FA8 /* MTDateAndTimePickerView.m */; };
 		53635348206D0C1A00220FA8 /* MTDateAndTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53635346206D0C1900220FA8 /* MTDateAndTimePickerView.xib */; };
 		536353FA206DFD8400220FA8 /* HBDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 536353F4206DFD8400220FA8 /* HBDatePickerView.m */; };
@@ -63,6 +65,8 @@
 
 /* Begin PBXFileReference section */
 		06B457375C59AB698AE47B94 /* libPods-HBDynamicForms.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HBDynamicForms.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FE67E5F212C659200223672 /* samplecode目录分析.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "samplecode目录分析.png"; sourceTree = "<group>"; };
+		1FE67E61212C65B400223672 /* cell自定义样式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell自定义样式.png"; sourceTree = "<group>"; };
 		53635344206D0C1900220FA8 /* MTDateAndTimePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDateAndTimePickerView.m; sourceTree = "<group>"; };
 		53635345206D0C1900220FA8 /* MTDateAndTimePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDateAndTimePickerView.h; sourceTree = "<group>"; };
 		53635346206D0C1900220FA8 /* MTDateAndTimePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTDateAndTimePickerView.xib; sourceTree = "<group>"; };
@@ -221,6 +225,8 @@
 				53F25251206B77F800FC4726 /* HBDF_PrefixHeader.pch */,
 				53F2511C206B69F900FC4726 /* Info.plist */,
 				53F2511D206B69F900FC4726 /* main.m */,
+				1FE67E61212C65B400223672 /* cell自定义样式.png */,
+				1FE67E5F212C659200223672 /* samplecode目录分析.png */,
 			);
 			path = HBDynamicForms;
 			sourceTree = "<group>";
@@ -416,7 +422,9 @@
 				538392652071C28C0036B7EA /* hljarea.plist in Resources */,
 				536353FB206DFD8400220FA8 /* ic_info_normal.png in Resources */,
 				53635348206D0C1A00220FA8 /* MTDateAndTimePickerView.xib in Resources */,
+				1FE67E62212C65B400223672 /* cell自定义样式.png in Resources */,
 				53F2511B206B69F900FC4726 /* LaunchScreen.storyboard in Resources */,
+				1FE67E60212C659200223672 /* samplecode目录分析.png in Resources */,
 				53F25140206B6C9B00FC4726 /* HBDFUploadIconCell.xib in Resources */,
 				53F25159206B702A00FC4726 /* ic_calendar.png in Resources */,
 				53F2514D206B6E1B00FC4726 /* HBDFMultiOptionCell.xib in Resources */,
