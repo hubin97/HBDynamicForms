@@ -8,18 +8,20 @@
 
 #import "HBDFLocationCell.h"
 
-@interface HBDFLocationCell()<BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,UITextFieldDelegate>
+@interface HBDFLocationCell()<BMKLocationManagerDelegate,BMKGeoCodeSearchDelegate,UITextFieldDelegate>
 {
     //gps
     double _localLng;
     double _localLat;
     
     //address
-    BMKReverseGeoCodeResult * _result;
+    BMKReverseGeoCodeSearchResult * _result;
 }
-@property (nonatomic, strong) BMKLocationService *locService; //定位
+
+@property (nonatomic, strong) BMKLocationManager *locManager; //定位
+
 @property (nonatomic, strong) BMKGeoCodeSearch *geoSearch;
-@property (nonatomic, strong) BMKReverseGeoCodeOption *geoCodeOption;
+@property (nonatomic, strong) BMKReverseGeoCodeSearchOption *geoCodeOption;
 
 @end
 
@@ -45,77 +47,103 @@
     //
     NSLog(@"locationAction---");
     
-    [SVProgressHUD showWithStatus:@"正在获取定位..." maskType:SVProgressHUDMaskTypeBlack];
-
+    [SVProgressHUD showWithStatus:@"正在获取定位..."];
+    
     //启动LocationService
-    [_locService startUserLocationService];
+    [self.locManager startUpdatingLocation];
     
     //若10s内没获取到定位信息,则dismiss并提示
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if(!_locService.userLocation.location)[SVProgressHUD showErrorWithStatus:@"获取定位失败!"];
         
         //???:特殊情况,获取到了地理坐标,反编译失败(可能情况:申请的key的安全码与项目中的bundle id要不一致)
         [SVProgressHUD dismiss];
         
         if(_callBackGpsBlock && [_result.address length] == 0)
         {
+            [SVProgressHUD showErrorWithStatus:@"获取地理位置失败!"];
+            
             _callBackGpsBlock(_localLng,_localLat,nil);
         }
     });
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        
-        //初始化BMKLocationService
-        _locService = [[BMKLocationService alloc]init];
-        _locService.delegate = self;
-        
+#pragma mark - Lazy loading
+- (BMKLocationManager *)locManager {
+    if (_locManager == nil) {
+        _locManager = [[BMKLocationManager alloc]init];
+        _locManager.delegate = self;
+        _locManager.coordinateType = BMKLocationCoordinateTypeBMK09LL;
+        _locManager.distanceFilter = kCLLocationAccuracyBestForNavigation;
+        _locManager.desiredAccuracy = kCLLocationAccuracyBest;
+        _locManager.activityType = CLActivityTypeAutomotiveNavigation;
+        _locManager.pausesLocationUpdatesAutomatically = NO;
+        // YES的话是可以进行后台定位的，但需要项目配置，否则会报错，具体参考开发文档
+        _locManager.allowsBackgroundLocationUpdates = NO;
+        _locManager.locationTimeout = 10;
+        _locManager.reGeocodeTimeout = 10;
+    }
+    return _locManager;
+}
+
+- (BMKGeoCodeSearch *)geoSearch {
+    if (_geoSearch == nil) {
         _geoSearch = [[BMKGeoCodeSearch alloc]init];
         _geoSearch.delegate = self;
-        _geoCodeOption = [[BMKReverseGeoCodeOption alloc]init];
     }
-    return self;
+    return _geoSearch;
 }
 
-
-#pragma mark - BMKLocationServiceDelegate
-- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
-{
-    NSLog(@"heading is %@",userLocation.heading);
+- (BMKReverseGeoCodeSearchOption *)geoCodeOption {
+    if (_geoCodeOption == nil) {
+        _geoCodeOption = [[BMKReverseGeoCodeSearchOption alloc]init];
+    }
+    return _geoCodeOption;
 }
 
-//处理位置坐标更新
-- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
-{
-    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+#pragma mark - BMKLocationManagerDelegate
+- (void)BMKLocationManager:(BMKLocationManager * _Nonnull)manager didFailWithError:(NSError * _Nullable)error {
+    NSLog(@"didFailWithError---");
+}
+
+- (void)BMKLocationManager:(BMKLocationManager * _Nonnull)manager didUpdateLocation:(BMKLocation * _Nullable)location orError:(NSError * _Nullable)error {
+    NSLog(@"didUpdateLocation---");
+    /**
+     (lldb) po location.location.coordinate.latitude
+     26.677874464676872
+     
+     (lldb) po location.location.coordinate.longitude
+     113.01120262687425
+     */
     
-    _localLng = userLocation.location.coordinate.longitude;
-    _localLat = userLocation.location.coordinate.latitude;
+    _localLng = location.location.coordinate.longitude;
+    _localLat = location.location.coordinate.latitude;
     
-    [_geoCodeOption setReverseGeoPoint:userLocation.location.coordinate];
-    
-    //!!!!: 注意申请的key的安全码与项目中的bundle id要匹配一致,否则即使能定位经纬度,也会导致地理反编译失败
-    BOOL ret = [_geoSearch reverseGeoCode:_geoCodeOption];
-    
-    if (ret)
+    NSLog(@"didUpdateLocation---%.2f %.2f", _localLat, _localLng);
+
+    //发起逆地理编码检索请求
+    self.geoCodeOption.location = location.location.coordinate;
+    BOOL flag = [self.geoSearch reverseGeoCode:self.geoCodeOption];
+    if (flag)
     {
-        NSLog(@"反编译成功!");
-        //关闭定位服务
-        [_locService stopUserLocationService];
+        NSLog(@"逆geo检索发送成功");
+        [self.locManager stopUpdatingLocation];
     }
     else
     {
-        NSLog(@"反编译失败!");
+        NSLog(@"逆geo检索发送失败");
     }
 }
 
-- (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error
-{
-    NSLog(@"onGetReverseGeoCodeResult:%@----------%@",result.address,result.businessCircle);
+#pragma mark - BMKGeoCodeSearchDelegate
+- (void)onGetGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKGeoCodeSearchResult *)result errorCode:(BMKSearchErrorCode)error {
+    NSLog(@"onGetGeoCodeResult---result:%@", result);
+
+}
+
+- (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeSearchResult *)result errorCode:(BMKSearchErrorCode)error {
+    NSLog(@"onGetReverseGeoCodeResult---:%@", result.address);
     
-    //反编译返回时才移除
+     //反编译返回时才移除
     [SVProgressHUD dismiss];
     
     if (error == BMK_SEARCH_NO_ERROR)
@@ -135,16 +163,12 @@
     }
 }
 
-- (void)onGetGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error
-{
-    NSLog(@"onGetGeoCodeResult:%@---%@-----%u",searcher,result,error);
-}
-
-#pragma mark - <UITextFieldDelegate>
+#pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     return YES;
 }
+
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     NSLog(@"---textFieldDidEndEditing");

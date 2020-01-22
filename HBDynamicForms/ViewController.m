@@ -8,25 +8,19 @@
 
 #import "ViewController.h"
 
-#import "HBDFScanInputCell.h"  // 输入
-#import "HBDFDatePickerCell.h"  // 日期选择
-#import "HBDatePickerView.h"
-
-#import "HBDFMultiOptionCell.h"  // 选择
+#import "HBDFScanInputCell.h"     // 输入
+#import "HBDFDatePickerCell.h"    // 日期选择
+#import "HBDFMultiOptionCell.h"   // 选择
 #import "HBDFExcessRemarkCell.h"  // 备注
+#import "HBDFLocationCell.h"      // 定位
+#import "HBDFUploadIconCell.h"    // 上传图片
 
-#import "HBDFLocationCell.h"          // 定位
-
-#import "HBDFUploadIconCell.h"     // 上传图片
-
-
-#import "HLJZHZWAppointHandleModel.h"
+#import "HBDatePickerView.h"
 #import "MTEditPopView.h"
 #import "MTShowImageBrower.h"
 
-//#import "HLJAreaModel.h"
+#import "HLJZHZWAppointHandleModel.h"
 #import "TZImagePickerController.h"
-//#import "TZImageManager.h"
 
 #define noNullStr(object) object == nil||[object isKindOfClass:[NSNull class]]?@"":object
 
@@ -330,8 +324,6 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-//#pragma mark - UIImagePickerControllerDelegate
-//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo
 #pragma mark - TZImagePickerControllerDelegate
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto infos:(NSArray<NSDictionary *> *)infos
 {
@@ -550,7 +542,7 @@
         locationCell.latTextField.text = [coordValue length] > 0?[coordValue componentsSeparatedByString:@","][1] : @"";
         
         __weak typeof(locationCell)weakCell = locationCell;
-        locationCell.callBackGpsBlock = ^(double lng, double lat,BMKReverseGeoCodeResult *result){
+        locationCell.callBackGpsBlock = ^(double lng, double lat,BMKReverseGeoCodeSearchResult *result){
             
             NSLog(@"callBackGpsBlock -- lng%f,lat:%f",lng,lat);
             weakCell.lngTextField.text = lng == 0? @"": [NSString stringWithFormat:@"%f",lng];
@@ -569,6 +561,7 @@
             handleModel1.title = @"详细地址";
             handleModel1.isNotOptional = model.isNotOptional;
             handleModel1.value = result != nil? result.address : @""; // 经纬度输入时,可为空项
+            
             [weakSelf adjustDataSourceWithAppointHandleModel:handleModel1];
             
             [_myTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:[_columns[0] indexOfObject:@"详细地址"] inSection:0], nil] withRowAnimation:UITableViewRowAnimationAutomatic];

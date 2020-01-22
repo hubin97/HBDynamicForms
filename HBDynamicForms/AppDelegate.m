@@ -19,12 +19,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+
     [self setupBMap];
     
     return YES;
 }
 
 - (void)setupBMap {
+    
     _mapManager = [[BMKMapManager alloc] init];
     //!!!!: 注意申请的key的安全码与项目中的bundle id要匹配一致,否则即使能定位经纬度,也会导致地理反编译失败
     int ret = [_mapManager start:@"n15lS26jzpdCfjuSN1kBbbiwKQxxybid" generalDelegate:nil];

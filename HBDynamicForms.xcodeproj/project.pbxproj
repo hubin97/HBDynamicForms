@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F7167A623CDDE1C00908E01 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7167A523CDDDED00908E01 /* libssl.a */; };
+		1F7167A723CDDE1C00908E01 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7167A423CDDDED00908E01 /* libcrypto.a */; };
 		1FE67E60212C659200223672 /* samplecode目录分析.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FE67E5F212C659200223672 /* samplecode目录分析.png */; };
 		1FE67E62212C65B400223672 /* cell自定义样式.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FE67E61212C65B400223672 /* cell自定义样式.png */; };
 		1FE67E64212C673600223672 /* 表单效果图.gif in Resources */ = {isa = PBXBuildFile; fileRef = 1FE67E63212C673500223672 /* 表单效果图.gif */; };
@@ -57,7 +59,6 @@
 		53F25268206B7C4F00FC4726 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F25267206B7C4F00FC4726 /* Security.framework */; };
 		53F2526A206B7C5D00FC4726 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F25269206B7C5C00FC4726 /* libsqlite3.0.tbd */; };
 		53F2526C206B7C6300FC4726 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F2526B206B7C6300FC4726 /* CoreTelephony.framework */; };
-		53F2526E206B7C6D00FC4726 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F2526D206B7C6D00FC4726 /* libstdc++.6.0.9.tbd */; };
 		53F25271206B7DD700FC4726 /* HLJZHZWAppointHandleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F25270206B7DD700FC4726 /* HLJZHZWAppointHandleModel.m */; };
 		53F25275206B7E3200FC4726 /* MTEditPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F25274206B7E3200FC4726 /* MTEditPopView.m */; };
 		53F25277206B84F800FC4726 /* imgAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = 53F25276206B84F800FC4726 /* imgAdd.png */; };
@@ -66,6 +67,8 @@
 
 /* Begin PBXFileReference section */
 		06B457375C59AB698AE47B94 /* libPods-HBDynamicForms.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HBDynamicForms.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F7167A423CDDDED00908E01 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		1F7167A523CDDDED00908E01 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		1FE67E5F212C659200223672 /* samplecode目录分析.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "samplecode目录分析.png"; sourceTree = "<group>"; };
 		1FE67E61212C65B400223672 /* cell自定义样式.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell自定义样式.png"; sourceTree = "<group>"; };
 		1FE67E63212C673500223672 /* 表单效果图.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "表单效果图.gif"; sourceTree = "<group>"; };
@@ -150,7 +153,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53F2526E206B7C6D00FC4726 /* libstdc++.6.0.9.tbd in Frameworks */,
+				1F7167A623CDDE1C00908E01 /* libssl.a in Frameworks */,
+				1F7167A723CDDE1C00908E01 /* libcrypto.a in Frameworks */,
 				53F2526C206B7C6300FC4726 /* CoreTelephony.framework in Frameworks */,
 				53F2526A206B7C5D00FC4726 /* libsqlite3.0.tbd in Frameworks */,
 				53F25268206B7C4F00FC4726 /* Security.framework in Frameworks */,
@@ -173,6 +177,16 @@
 				8BEB08EAEDB1D03C6BD3DA2E /* Pods-HBDynamicForms.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		1F7167A323CDDDED00908E01 /* thirdlibs */ = {
+			isa = PBXGroup;
+			children = (
+				1F7167A423CDDDED00908E01 /* libcrypto.a */,
+				1F7167A523CDDDED00908E01 /* libssl.a */,
+			);
+			name = thirdlibs;
+			path = Pods/BaiduMapKit/BaiduMapKit/thirdlibs;
 			sourceTree = "<group>";
 		};
 		536353F3206DFD8400220FA8 /* HBDatePickerView */ = {
@@ -265,7 +279,7 @@
 		53F2512E206B6C9B00FC4726 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				53F2515E206B754A00FC4726 /* 依赖文件 */,
+				53F2515E206B754A00FC4726 /* MTImagePicker */,
 				53F2512F206B6C9B00FC4726 /* HBToolBarView.h */,
 				53F25138206B6C9B00FC4726 /* HBToolBarView.m */,
 				53F25273206B7E3200FC4726 /* MTEditPopView.h */,
@@ -305,18 +319,18 @@
 			path = MultiStyleCell;
 			sourceTree = "<group>";
 		};
-		53F2515E206B754A00FC4726 /* 依赖文件 */ = {
+		53F2515E206B754A00FC4726 /* MTImagePicker */ = {
 			isa = PBXGroup;
 			children = (
 				53F25164206B754A00FC4726 /* MTImagePickerCell.h */,
 				53F2515F206B754A00FC4726 /* MTImagePickerCell.m */,
 				53F25162206B754A00FC4726 /* MTImagePickerCell.xib */,
-				53F25160206B754A00FC4726 /* MTShowImageBrower.m */,
 				53F25163206B754A00FC4726 /* MTShowImageBrower.h */,
+				53F25160206B754A00FC4726 /* MTShowImageBrower.m */,
 				53F25161206B754A00FC4726 /* MTImagePickerModel.h */,
 				53F25165206B754A00FC4726 /* MTImagePickerModel.m */,
 			);
-			path = "依赖文件";
+			path = MTImagePicker;
 			sourceTree = "<group>";
 		};
 		53F25252206B78FE00FC4726 /* GCPlaceholderTextView */ = {
@@ -331,6 +345,7 @@
 		53F2525C206B7C2900FC4726 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F7167A323CDDDED00908E01 /* thirdlibs */,
 				53F2526D206B7C6D00FC4726 /* libstdc++.6.0.9.tbd */,
 				53F2526B206B7C6300FC4726 /* CoreTelephony.framework */,
 				53F25269206B7C5C00FC4726 /* libsqlite3.0.tbd */,
@@ -365,8 +380,6 @@
 				53F25107206B69F900FC4726 /* Sources */,
 				53F25108206B69F900FC4726 /* Frameworks */,
 				53F25109206B69F900FC4726 /* Resources */,
-				BBFC7FDAAAEFA6FE53A2EEA9 /* [CP] Embed Pods Frameworks */,
-				01BD824A77255A37B64607B9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -447,49 +460,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		01BD824A77255A37B64607B9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HBDynamicForms/Pods-HBDynamicForms-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		34904BF74FF42BA95968745D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HBDynamicForms-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		BBFC7FDAAAEFA6FE53A2EEA9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HBDynamicForms/Pods-HBDynamicForms-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -652,8 +638,9 @@
 			baseConfigurationReference = C155ABF2EB57429DFD499733 /* Pods-HBDynamicForms.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B6FL3MEU36;
+				DEVELOPMENT_TEAM = YTPNCWF278;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HBDynamicForms/Frameworks/BaiduMapKit/BaiduMapKit",
@@ -665,9 +652,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HBDynamicForms/Frameworks/BaiduMapKit/BaiduMapKit/thirdlibs",
+					"$(PROJECT_DIR)/Pods/BaiduMapKit/BaiduMapKit/thirdlibs",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.mastercom.HBDynamicForms;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.mastercom.HBDynamicForms.xx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -677,8 +666,8 @@
 			baseConfigurationReference = 8BEB08EAEDB1D03C6BD3DA2E /* Pods-HBDynamicForms.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B6FL3MEU36;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HBDynamicForms/Frameworks/BaiduMapKit/BaiduMapKit",
@@ -690,9 +679,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HBDynamicForms/Frameworks/BaiduMapKit/BaiduMapKit/thirdlibs",
+					"$(PROJECT_DIR)/Pods/BaiduMapKit/BaiduMapKit/thirdlibs",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.mastercom.HBDynamicForms;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
